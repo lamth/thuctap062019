@@ -1,0 +1,83 @@
+## Tìm hiểu ảo hóa Virtualization và Hypervisor## 
+### 1. Khái niệm Virtualization ###  
+- Virtualization, hay còn gọi là ảo hóa, là một công nghệ được thiết kế để tạo ra tầng trung gian giữa hệ thống phần cứng máy tính và phần mềm chạy trên nó. Ý tưởng của công nghệ ảo hóa máy chủ là từ một máy vật lí đơn lẻ có thể tạo thành nhiều máy ảo độc lập. Mỗi một máy ảo đều có một thiết lập nguồn hệ thống riêng rẽ, hệ điều hành riêng và các ứng dụng riêng. Ảo hóa có nguồn gốc từ việc phân chia ổ đĩa, chúng được phân chia một máy chủ thực hành nhiều máy chủ logic. Một khi máy chủ thực được chia, mỗi máy chủ có thể chạy một hệ điều hành và các ứng dụng độc lập. 
+### 2. Chức năng ảo hóa ### 
+- Tiết kiệm chi phí và tối ưu hóa hạ tầng CNTT là điều mà các doanh nghiệp quan tâm, đặc biệt là các doanh nghiệp có nhiều chi nhánh trong cả nước hay trên toàn cầu. Ảo hóa giúp doanh nghiệp nâng cao năng lực bảo mật dữ liệu, tăng cường khả năng khôi phục hoạt động sau thảm họa, nâng cao tính linh hoạt và cắt giảm chi phí đầu tư cho CNTT như phải cập nhật liên tục các phần mềm, các tính năng mới… trên nhiều máy tính vật lý.
+### 3. Virtual Machine ### 
+- Virtual Machine hay còn gọi là máy ảo , là một môi trường hoạt động độc lập- phần mềm hoạt động cùng nhưng độc lập với hệ điều hành máy chủ. 
+- ![Atom](https://lh3.googleusercontent.com/proxy/kuBmW93hhPqoQhcJEitCUF7Fii69mzb45UfI_oUDnY8rXr8a7h852UIXcMMIyvbQS0MbaNHl81BY62kmfr0SRQCByTNs83-n3ScnvrOevjW6KdkbBdkH23NzYXKETDLzW56_ttinxycsnSWb9g)
+
+## Hypervisor ##
+- Hypervisor hay còn gọi là phần mềm giám sát máy ảo: Là một chương trình phần mềm quản lí một hoặc nhiều máy ảo (VM). Nó được sử dụng để tạo, startup, dừng và reset lại các máy ảo. Các hypervisor cho phép mỗi VM hoặc "guest" truy cập vào lớp tài nguyên phần cứng vật lí bên dưới, chẳng hạn như CPU,RAM và lưu trữ. Nó cũng có thể giới hạn số lượng tài nguyên hệ thống mà mỗi náy ảo có thể sử dụng để đảm bảo cho nhiều máy ảo cùng sử dụng đồng thời trên một hệ thống. 
+- Có 2 loại hypervisor là Native (hay còn gọi là Bare metal) và Host Based 
+### 1.Loại : Native hypervisor
+- Một hypervisor ở dạng native (hay còn gọi "bare-metal") chạy trực tiếp trên phần cứng. Nó nằm giữa phần cứng và một hoặc nhiều hệ điều hành khách(guest operating system). Nó được khởi động trước cả hệ điều hành và tương tác trực tiếp với Kernel. Điều này mang lại hiệu suất cao nhất có thể vì không có hệ điều hành chính nào cạnh tranh tài nguyên máy tính với nó. Tuy nhiên, nó cũng đồng nghĩa với việc hệ thống chỉ có thể được sử dụng để chạy các máy ảo vì hypervisor luôn phải chạy ngầm bên dưới. 
+- Các hypervisor dạng native này có thể kể đến như VMware ESXi, Microsoft Hyper-V và Apple Boot Camp.
+- ![Atom)(https://sinhvientot.net/wp-content/uploads/2018/11/Type-1-Hypervisor.png)     
+### Loại 2: Hosted ###
+- Một hypervisor dạng hosted được cài đặt trên mộ máy chủ (host computer ), mà trong đó có một hệ điều hành đã được cài đặt. Nó chạy như một ứng dụng cũng như các phần mềm khác trên máy tính. Hầu hết các hypervisor dạng hosted có thể quản lí và chạy nhiều máy ảo cùng một lúc. Lợi thế của một hypervisor dạng hosted là nó có thể được bật lên hoặc thoát ra khi cần thiết, giải phóng tài nguyên cho máy chủ. Tuy nhiên, vì chạy bên trên một hệ điều hành, nó có thể đem lại hiệu suất tương tự như một hypervisor ở dạng native. 
+- Ví dụ về các hypervisor dạng hosted bao gồm VMware Workstation, Oracle VirtualBox và Parallesl Desktop for Mac. 
+- ![Atom)(https://cdn.slant.co/d38331b3-8707-46c4-8414-221884125153/-/format/jpeg/-/progressive/yes/-/preview/480x480/)  
+## Ring ## 
+- Trong khoa học máy tính, Hierarchical Protection Domains (hay Protection Rings) là cơ chế nhằm bảo vệ dữ liệu và chức năng của một chương trình tránh khỏi nguy cơ lỗi hoặc bị truy cập trái phép bởi các chương trình khác
+- Một Protection Ring là một mức độ (mode/level/layer) truy cập tài nguyên hệ thống. Số lượng Ring tùy thuộc vào kiến trúc CPU và hệ điều hành chạy trên kiến trúc đó có khả năng hỗ trợ bao nhiêu Ring.   
+- Các Ring được sắp xếp có thứ bậc, từ mức có nhiều đặc quyền nhất (dành cho trusted-software, thường được đánh số 0) đến mức có ít đặc quyền nhất (dành cho untrusted-software, được đánh số cao nhất).
+- ![Atom)(https://fawzi.files.wordpress.com/2009/05/four-protection-rings.png?w=584)  
+- Các chương trình hoạt động tại Ring 0 có đặc quyền cao nhất, có thể tương tác trực tiếp với phần cứng như CPU, Memory…
+
+- Để cho phép các ứng dụng nằm ở Ring có trọng số cao truy cập các tài nguyên được quản lý bởi các chương trình nằm ở Ring có trọng số thấp hơn, người ta xây dựng các cổng (gate) đặc biệt. Ví dụ như system call (lời gọi hàm hệ thống) giữa các Ring.
+
+- Việc quy định chặt chẽ chương trình nào nằm tại Ring nào cộng với việc xây dựng các cổng phù hợp giữa các Ring sẽ đảm bảo tính ổn định của hệ thống, đồng thời ngăn chặn các chương trình nằm trong Ring cao sử dụng trái phép (do vô tình hoặc cố ý) các tài nguyên dành cho các chương trình khác nằm tại Ring thấp hơn
+
+- Ví dụ, một spyware đang chạy với tư cách là ứng dụng cho người dùng thông thường (thuộc untrusted software) nằm tại Ring 3 có ý định bật webcam mà không được sự đồng ý của người dùng. Hành vi này sẽ bị hệ thống ngăn chặn vì muốn truy cập tới phần cứng là thiết bị webcam nó phải sử dụng một hàm trong phần mềm điều khiển thiết bị (device driver) của webcam (thuộc trusted software) nằm tại Ring 1.
+
+- Hầu hết các hệ điều hành chỉ sử dụng 2 Ring ngay cả khi phần cứng mà hệ điều hành chạy trên đó hỗ trợ nhiều hơn 2 Ring. Ví dụ, Windows chỉ sử dụng 2 mức là Ring 0 (tương ứng với Kernel Mode) và Ring 3 (tương ứng với User Mode).
+
+–> Tóm lại, ring cách ly người dùng với hệ điều hành bằng các cấp đặc quyền.
+
+## Phân loại ảo hóa ## 
+### 1. Hardware virtualization. ### 
+- Ảo hóa phần cứng đề cập đến việc tạo ra một máy ảo hoạt động như một máy tính thực sự với một hệ điều hành. Phần mềm được thực thi trên các máy ảo này được tách ra khỏi tài nguyên phần cứng cơ bản. 
+- ví dụ như: Một máy tính Microsoft Windows có thể lưu trữ một máy ảo trông giống như một máy tính có hệ điều hành Ubuntu Linux; Phần mềm  dựa trên Ubuntu có thể chạy trên máy ảo. 
+- Các loại ảo hóa phần cứng: Full Virtualization và Paravirtualization 
+   - **Full Virtualization**: Trong giải pháp này, các non-virtualizable instruction từ guest OS được translate qua binary translation ở virtualization layer và cache lại kết quả dùng cho các lần sau. Còn user level application thì thực hiện direct execution xuyên qua virtualization layer. Bằng cách này, trở ngại các chỉ thị guest OS không hoạt động ở ring khác 0 bị vượt qua còn các user level application vẫn họat động ở native speed (tốc độ đáp ứng yêu cầu giống như khi không có ảo hóa). Guest OS hoàn toàn không nhận ra nó đang nằm trên một lớp ảo hóa vì các low-level request không có gì thay đổi. Do đó guestOS hoàn toàn không phải chỉnh sửa gì.
+- ![Atom)(https://www.researchgate.net/profile/Jamal_Zemerly/publication/268291860/figure/fig1/AS:295478332805124@1447458932829/Full-virtualization-concepts.png)
+- ![Atom)(https://tuantuluong.files.wordpress.com/2014/08/full_virtualization.png)  
+   - Guest OS nó sẽ không bị sửa đổi hệ điều hành để tương thích với phần cứng, mà nó sẽ dịch nhị phân các yêu cầu, rồi đưa cho thằng VMM, xong thằng VMM làm trung gian đưa cho thằng Hardware xử lý.
+   - Nhìn vào ring = 1 của nó, thì thằng Guest OS này chỉ chạy trên quyền user lever, chứ không chạy trên quyền privilege, nó không trực tiếp chạy trên thằng hardware. Nhưng vì code của OS không bị sửa đổi, nên thằng Guest OS nó không biết điều đó, và nó làm việc bình thường như trên máy thật vậy, nhưng thực chất nó đang làm việc với thằng VMM.
+
+   - **Paravirtualization**:Trong paravirtualization, hypervisor sẽ cung cấp hypercall interface. Guest OS sẽ được chỉnh sửa kernel code để thay thế non-virtualizable instruction bằng các hypercall này. Do kernel code của guest OS phải chỉnh sửa nên giải pháp này không thể sử dụng được một số hệ điều hành mã nguồn đóng như windows. Thêm nữa, do guest OS sử dụng hypercall nên nó sẽ biết được nó đang nằm trên một virtualization layer.
+- ![Atom)(https://www.researchgate.net/profile/Jamal_Zemerly/publication/268291860/figure/fig2/AS:295478332805125@1447458932870/Para-virtualization-concepts.png) 
+- ![Atom)(https://static.packt-cdn.com/products/9781784399054/graphics/3990_01_07.jpg)  
+   
+   - **Hardware Assisted Virtualization**: Các giải pháp hỗ trợ ảo hóa của hardware vendor được công bố vào năm 2006 như VT-x của Intel hay AMD-v của AMD. Cả hai giải pháp này đều hướng đến việc xây dựng một CPU mode mới dành riêng cho virtualization layer gọi là root mode ( CPU mode -1). Bằng cách này, các OS request từ guest OS sẽ được tự động đi xuyên qua virtualization layer và cũng không cần kỹ thuật binary translation nữa do guest OS đã nằm ở ring 0. Trạng thái của guest OS sẽ được lưu trong Virtual machine control structure (VT-x) hoặc Virtual machine control block (AMD-v). Tuy rất hứa hẹn nhưng giải pháp này chưa tối ưu về code nên ứng dụng còn hạn chế. Hiện tại VMWare chỉ tận dụng hardware virtualization cho 64 bits guest OS.
+- ![Atom)(https://www.researchgate.net/profile/Waheed_Iqbal/publication/255669802/figure/fig3/AS:341342443065364@1458393788726/Hardware-Assisted-Virtualization-approach-for-the-X86-architecture-Hardware-assistance.png)
+   - Đây chính là sự kết hợp của bố Full Virtualization và mẹ Paravirtualization, có tất cả ưu điểm của cả hai bố mẹ, vừa không bị sửa đổi OS, tương thích với phần cứng mà vẫn được chạy ở ring 0
+
+### 2. Desktop virtualization ### 
+- ảo hóa máy trạm là công nghệ phần mềm phân tách môi trường máy tính và phần mềm ứng dụng liên quan từ các thiết bị vật lí được sử dụng để truy cập nó. 
+ - ![Atom)(https://www.veritis.com/wp-content/uploads/2019/05/desktop-virtualization-services.png)  
+- Hai giải pháp ảo hóa máy trạm điển hình là: Essential và Discretionary
+- Công nghệ ảo hóa máy trạm bao gồm: 
+   - Microsoft Terminal Services Remote Desktops: Giúp tiết kiệm chi phí thông qua sử dụng công nghệ ảo hóa phiên, cho phép nhiều người dùng có thể truy cập từ xa vào một hệ điều hành duy nhất.
+   - Virtualized Desktop Infrastructure (VDI): Giải pháp VDI bao gồm bộ công cụ và phần mềm quản lý cho phép doanh nghiệp tận dụng cơ sở hạ tầng mạng hiện có và triển khai các hệ điều hành từ xa đến hàng trăm hoặc hàng ngàn máy trạm. Giúp tiết kiệm chi phí, thời gian triển khai và tăng hiệu suất hoạt động của các máy trạm. Hệ thống được triển khai đúng theo tiêu chuẩn ITIL.
+### 3. Ảo hóa Containerization ### 
+- là giải pháp ảo hóa, tự động hóa thế hệ mới kế tiếp sau Hypervisor Virtualization, được các hãng công nghệ hàng đầu thế giới như googl, Facebook, Amazon áp dụng rộng rãi, đem lại hiệu quả đột phá với các ưu điểm vượt trội về tốc độ triển khai, khả năng mở rộng, tính an toàn và trải nghiệm người dùng. 
+- Giải pháp ảo hoá 4.0 do Hyperlogy cung cấp được xây dựng trên nền tảng công nghệ containerization phổ biến nhất trên thế giới hiện nay, bao gồm: Ansible – system automation tool, Docker – container engine và Kubernetes – container orchestration.
+
+### Các loại ảo hóa khác ### 
+- Software: 
+  - application virtualization và workspace virtualization: cô lập các ứng dụng riêng lẻ khỏi HĐH cơ bản và các ứng dụng khác; kết hợp chặt chẽ với khái niệm portable application. 
+  - services virtualization: 
+- Ảo hóa storage: còn được gọi là lưu trữ đám mây là quá trình kết hợp lưu trữ vật lý từ nhiều thiết bị lưu trữ để nó trông giống như một thiết bị lưu trữ duy nhất. Ảo hóa lưu trữ thường được sử dụng trong storage area networks. Có hai loại ảo hóa lưu trữ:
+  - Block Level Storage: các raw volume được tạo và mỗi block có thể được sử dụng như 1 ổ cứng riêng lẻ. HĐH dựa trên máy chủ kiểm soát các block này và mỗi block có thể được định dạng bằng hệ thống tệp được yêu cầu.
+  - File Level Storage: tạo thành một nhóm lưu trữ logic và cho phép người dùng sử dụng đường dẫn logic để truy cập tệp.
+- Ảo hóa network: Ảo hóa mạng kết hợp thiết bị mạng vật lý và tài nguyên mạng phần mềm và chức năng mạng thành một tài nguyên. Nó chia băng thông thành nhiều kênh độc lập có thể được gán cho máy chủ và thiết bị. Có hai loại ảo hóa network:
+  - Internal: Một hệ thống duy nhất được cung cấp chức năng giống như mạng cho các software containers
+  - External: Nhiều mạng được kết hợp thành một đơn vị ảo  
+ 
+  
+   
+  
+   
+
